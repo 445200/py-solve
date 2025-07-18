@@ -1,0 +1,24 @@
+3D BOX PACKING CALCULATION RESULTS
+==================================================
+
+Container Dimensions: 13500 × 2440 × 2680 mm
+Box Dimensions: 680 × 680 × 235 mm
+
+OPTIMAL PACKING SOLUTION:
+  Box Placement Orientation: Original Orientation
+  Box Actual Dimensions: 680 × 680 × 235 mm
+  Boxes in Length Direction: 19 pieces
+  Boxes in Width Direction: 3 pieces
+  Boxes in Height Direction: 11 pieces
+  TOTAL BOX COUNT: 627 pieces
+
+REMAINING SPACE:
+  Remaining Length: 580.0 mm
+  Remaining Width: 400.0 mm
+  Remaining Height: 95.0 mm
+
+VOLUME CALCULATIONS:
+  Container Total Volume: 88.279 m³
+  Single Box Volume: 0.108664 m³
+  Total Cargo Volume: 68.132 m³
+  VOLUME UTILIZATION RATE: 77.18%
