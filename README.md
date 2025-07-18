@@ -17,13 +17,15 @@
 
 #### 货车1 (Type2 - 12×3×3米)
 - 费用: 1500元
-- 载重: 6200kg (103.3%利用率)
-- 装载: A类4件 + C类6件
+- 载重: 5700kg (95.0%利用率) ✅
+- 装载: A类4件 + C类5件
 
 #### 货车2 (Type2 - 12×3×3米)  
 - 费用: 1500元
-- 载重: 3800kg (63.3%利用率)
-- 装载: B类3件 + A类1件
+- 载重: 4300kg (71.7%利用率) ✅
+- 装载: B类3件 + A类1件 + C类1件
+
+**重要修正**: 修复了之前的超载问题，现在所有货车都在载重限制内
 
 ## 问题背景
 
@@ -64,6 +66,7 @@
 logistics_optimization/
 ├── logistics_optimization.py      # 核心优化算法
 ├── simple_analysis.py            # 完整分析工具
+├── loading_instructions.py       # 🆕 详细装货指导
 ├── visualize_solution.py         # 可视化工具(需matplotlib)
 ├── requirements.txt              # Python依赖
 ├── logistics_optimization_report.md  # 详细技术报告
@@ -79,6 +82,9 @@ python3 logistics_optimization.py
 
 # 运行完整分析报告
 python3 simple_analysis.py
+
+# 🆕 生成详细装货指导 (推荐！)
+python3 loading_instructions.py
 ```
 
 ### 可视化分析(可选)
@@ -124,8 +130,8 @@ $ python3 simple_analysis.py
 ### 利用率指标
 | 指标 | 货车1 | 货车2 | 平均值 |
 |------|-------|-------|--------|
-| 载重利用率 | 103.3% | 63.3% | 83.3% |
-| 空间利用率 | 66.7% | 36.1% | 51.4% |
+| 载重利用率 | 95.0% ✅ | 71.7% ✅ | 83.4% |
+| 空间利用率 | 61.1% | 41.7% | 51.4% |
 
 ### 算法复杂度
 - **时间复杂度**: O(n × p³) (n=货物数, p=位置数)

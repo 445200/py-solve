@@ -352,19 +352,31 @@ class LogisticsOptimizer:
             print("装载货物:")
             
             cargo_count = {}
+            
+            # 按货物类型分组显示，更清晰
+            cargo_by_type = {}
             for cargo in solution.cargo_instances:
                 cargo_type = cargo.cargo_type
+                if cargo_type not in cargo_by_type:
+                    cargo_by_type[cargo_type] = []
+                cargo_by_type[cargo_type].append(cargo)
                 cargo_count[cargo_type] = cargo_count.get(cargo_type, 0) + 1
-                
-                rotation_info = "旋转" if cargo.rotated else "未旋转"
-                print(f"  - {cargo_type}_{cargo.instance_id}: "
-                      f"位置({cargo.x:.1f}, {cargo.y:.1f}, {cargo.z:.1f}), "
-                      f"尺寸({cargo.length:.1f}×{cargo.width:.1f}×{cargo.height:.1f}), "
-                      f"{rotation_info}")
             
-            print("货物统计:", end=" ")
+            # 按类型显示详细装载信息
+            for cargo_type in sorted(cargo_by_type.keys()):
+                cargos = cargo_by_type[cargo_type]
+                print(f"\n  {cargo_type}类货物 ({len(cargos)}件):")
+                for cargo in sorted(cargos, key=lambda x: x.instance_id):
+                    rotation_info = "(已旋转)" if cargo.rotated else "(未旋转)"
+                    print(f"    {cargo_type}_{cargo.instance_id}: "
+                          f"起始位置({cargo.x:.1f}, {cargo.y:.1f}, {cargo.z:.1f}) "
+                          f"→ 结束位置({cargo.x + cargo.length:.1f}, {cargo.y + cargo.width:.1f}, {cargo.z + cargo.height:.1f}) "
+                          f"尺寸[长×宽×高]({cargo.length:.1f}×{cargo.width:.1f}×{cargo.height:.1f}m) "
+                          f"重量{cargo.weight}kg {rotation_info}")
+            
+            print(f"\n  货物统计:", end=" ")
             for cargo_type, count in cargo_count.items():
-                print(f"{cargo_type}类 {count}件", end=" ")
+                print(f"{cargo_type}类{count}件", end=" ")
             print()
             
             total_cost += solution.total_cost
