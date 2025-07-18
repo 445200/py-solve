@@ -105,6 +105,7 @@ class LogisticsOptimizer:
         # 检查重量约束
         total_weight = sum(instance.weight for instance in cargo_instances)
         if total_weight > truck.max_weight:
+            print(f"重量约束失败: {total_weight}kg > {truck.max_weight}kg")
             return False
         
         # 使用简化的3D装箱算法检查空间约束
@@ -118,6 +119,11 @@ class LogisticsOptimizer:
     
     def _find_best_packing(self, cargo_instances: List[CargoInstance], truck: Truck) -> Optional[List[CargoInstance]]:
         """寻找最佳装箱方案"""
+        # 首先检查重量约束
+        total_weight = sum(instance.weight for instance in cargo_instances)
+        if total_weight > truck.max_weight:
+            return None
+        
         # 使用贪心算法进行3D装箱
         packed_items = []
         occupied_spaces = []
